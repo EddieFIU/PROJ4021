@@ -3,6 +3,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import com.mysql.cj.jdbc.DatabaseMetaData;
 
@@ -26,6 +27,11 @@ public class App{
             }
             else{
                 System.out.println(co.Name  + " is logged in");
+            }
+            
+            List<Model.Candidate> allCandidates =  repo.GetAllCandidates();
+            for (Model.Candidate candidate : allCandidates) {
+                System.out.println("Candidate is: " + candidate.FirstName);
             }
             
           } catch (Exception e) {
