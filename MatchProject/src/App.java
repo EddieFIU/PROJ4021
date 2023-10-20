@@ -16,7 +16,9 @@ public class App{
           try {
             DatabaseRepo repo = new DatabaseRepo();
             Model.LoginUser loggedInUser = repo.GetLoginByUserName("edi");
-            System.out.println(loggedInUser.UserType);
+            System.out.println(loggedInUser.UserType + " is the user type we are reading");
+            Model.Candidate loggedInCandidate = repo.GetCandidateByLoginID(loggedInUser.ID);
+            System.out.println(loggedInCandidate.FirstName + " is logged in");
 
           } catch (Exception e) {
             // TODO: handle exception
