@@ -11,7 +11,7 @@ public class DatabaseRepo {
     
     static final String dbURL = "jdbc:mysql://localhost:3306/Match";
     static final String user = "root";
-    static final String pass = "Moli0128!";
+    static final String pass = "Mo";
     
     public DatabaseRepo()
     {
