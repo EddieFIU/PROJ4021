@@ -11,7 +11,7 @@ public class DatabaseRepo {
     
     static final String dbURL = "jdbc:mysql://localhost:3306/Match";
     static final String user = "root";
-    static final String pass = "Mo";
+    static final String pass = "M";
     
     public DatabaseRepo()
     {
@@ -73,6 +73,33 @@ public class DatabaseRepo {
             }
 
         return candidate;
+    }
+
+ public Model.Company GetCompanyByLoginID(int loginID)
+    {
+        final String query = "SELECT * FROM company where loginuserID = " + loginID;
+          Model.Company company = new Model.Company();
+         try (
+            Connection conn = DriverManager.getConnection(dbURL, user, pass);
+            Statement stmt = conn.createStatement();
+           
+            ResultSet rs = stmt.executeQuery(query);)
+            {
+                 if (rs.next())
+                    {
+                    company.ID = rs.getInt("ID");
+                    company.Name = rs.getString("Name");
+                    company.Industry = rs.getString("Industry");
+                    company.Email = rs.getString("EMail");
+                    company.PhoneNumber = rs.getString("PhoneNumber");
+                    company.LogInUserID = rs.getInt("loginuserID");                
+                    }
+            }
+               catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        return company;
     }
 
 }

@@ -19,7 +19,15 @@ public class App{
             System.out.println(loggedInUser.UserType + " is the user type we are reading");
             Model.Candidate loggedInCandidate = repo.GetCandidateByLoginID(loggedInUser.ID);
             System.out.println(loggedInCandidate.FirstName + " is logged in");
-
+            Model.Company co = repo.GetCompanyByLoginID(0);
+            if (co.ID==0)
+            {
+                System.out.println("No records found for ID"); 
+            }
+            else{
+                System.out.println(co.Name  + " is logged in");
+            }
+            
           } catch (Exception e) {
             // TODO: handle exception
           }  
