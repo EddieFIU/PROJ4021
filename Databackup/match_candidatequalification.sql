@@ -18,33 +18,29 @@ USE `match`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `candidate`
+-- Table structure for table `candidatequalification`
 --
 
-DROP TABLE IF EXISTS `candidate`;
+DROP TABLE IF EXISTS `candidatequalification`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `candidate` (
+CREATE TABLE `candidatequalification` (
   `ID` int NOT NULL AUTO_INCREMENT,
-  `FirstName` varchar(45) NOT NULL,
-  `LastName` varchar(45) NOT NULL,
-  `DOB` datetime NOT NULL,
-  `EMail` varchar(45) NOT NULL,
-  `CellPhone` varchar(45) NOT NULL,
-  `loginuserID` int NOT NULL,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `ID_UNIQUE` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `Qualification` varchar(45) NOT NULL,
+  `levelOfExperience` int NOT NULL,
+  `candidateID` int NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `candidate`
+-- Dumping data for table `candidatequalification`
 --
 
-LOCK TABLES `candidate` WRITE;
-/*!40000 ALTER TABLE `candidate` DISABLE KEYS */;
-INSERT INTO `candidate` VALUES (1,'Eddie','Molieri','1976-01-28 00:00:00','emoli018@fiu.edu','3055525656',1),(2,'Nathan','N','1985-01-01 00:00:00','nathan@fiu.edu','3059996565',3),(3,'Sergio','X','1988-01-01 00:00:00','sergiou@fiu.edu','3052223131',4),(4,'Remy','Y','1987-01-01 00:00:00','remy@fiu.edu','3052211111',5);
-/*!40000 ALTER TABLE `candidate` ENABLE KEYS */;
+LOCK TABLES `candidatequalification` WRITE;
+/*!40000 ALTER TABLE `candidatequalification` DISABLE KEYS */;
+INSERT INTO `candidatequalification` VALUES (1,'MS Access',5,1),(2,'Visual Basic',5,1),(3,'SQL Server Admin',3,1),(4,'T-SQL',3,1),(5,'C#',4,1),(6,'MVC',5,2),(7,'HTML',5,2),(8,'JAVA',5,2),(9,'MySQL',3,2),(10,'HTML',5,3),(11,'SCRUM Master',5,3),(12,'JQUERY',3,3),(13,'T-SQL',4,3),(14,'LINQ',5,3),(15,'Fortran',5,4),(16,'LISP',5,4),(17,'JAVA',5,4),(18,'C#',5,4),(19,'RPG',5,4),(20,'COBOL',5,4),(21,'MS Access',5,2),(22,'Visual Basic',5,2);
+/*!40000 ALTER TABLE `candidatequalification` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

@@ -32,7 +32,7 @@ CREATE TABLE `loginuser` (
   `CreatedDateTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `loginuser` (
 
 LOCK TABLES `loginuser` WRITE;
 /*!40000 ALTER TABLE `loginuser` DISABLE KEYS */;
-INSERT INTO `loginuser` VALUES (1,'edi','test','candidate','2023-10-20 13:18:04');
+INSERT INTO `loginuser` VALUES (1,'Eddie','test','candidate','2023-10-20 13:18:04'),(2,'CompanyA','testing','company','2023-10-23 11:34:44'),(3,'Nathan','test2','candidate','2023-10-23 11:36:10'),(4,'Sergio','test3','candidate','2023-10-23 11:36:10'),(5,'Remy','test4','candidate','2023-10-23 11:36:10'),(6,'CompanyB','testz','company','2023-10-23 11:36:10');
 /*!40000 ALTER TABLE `loginuser` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-20 14:39:19
+-- Dump completed on 2023-10-23 12:20:31

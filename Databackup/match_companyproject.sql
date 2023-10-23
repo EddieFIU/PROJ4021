@@ -18,33 +18,31 @@ USE `match`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `candidate`
+-- Table structure for table `companyproject`
 --
 
-DROP TABLE IF EXISTS `candidate`;
+DROP TABLE IF EXISTS `companyproject`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `candidate` (
+CREATE TABLE `companyproject` (
   `ID` int NOT NULL AUTO_INCREMENT,
-  `FirstName` varchar(45) NOT NULL,
-  `LastName` varchar(45) NOT NULL,
-  `DOB` datetime NOT NULL,
-  `EMail` varchar(45) NOT NULL,
-  `CellPhone` varchar(45) NOT NULL,
-  `loginuserID` int NOT NULL,
+  `ProjectName` varchar(45) NOT NULL,
+  `ProjectManagerName` varchar(45) NOT NULL,
+  `ProjectManagerEmail` varchar(45) NOT NULL,
+  `CompanyID` int NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `candidate`
+-- Dumping data for table `companyproject`
 --
 
-LOCK TABLES `candidate` WRITE;
-/*!40000 ALTER TABLE `candidate` DISABLE KEYS */;
-INSERT INTO `candidate` VALUES (1,'Eddie','Molieri','1976-01-28 00:00:00','emoli018@fiu.edu','3055525656',1),(2,'Nathan','N','1985-01-01 00:00:00','nathan@fiu.edu','3059996565',3),(3,'Sergio','X','1988-01-01 00:00:00','sergiou@fiu.edu','3052223131',4),(4,'Remy','Y','1987-01-01 00:00:00','remy@fiu.edu','3052211111',5);
-/*!40000 ALTER TABLE `candidate` ENABLE KEYS */;
+LOCK TABLES `companyproject` WRITE;
+/*!40000 ALTER TABLE `companyproject` DISABLE KEYS */;
+INSERT INTO `companyproject` VALUES (1,'ProjectA','Bill','bill@fiu.com',1),(2,'ProjectB','Bill','bill@fiu.com',1),(3,'ProjectC','Hana','hana@fiu.com',1),(4,'Cosmos','Linda','linda@fiu.com',2),(5,'Inventory','Sophie','sophie@fiu.com',2),(6,'data Accessors','Yuru','yuru@fiu.com',2);
+/*!40000 ALTER TABLE `companyproject` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

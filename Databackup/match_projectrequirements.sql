@@ -18,33 +18,30 @@ USE `match`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `candidate`
+-- Table structure for table `projectrequirements`
 --
 
-DROP TABLE IF EXISTS `candidate`;
+DROP TABLE IF EXISTS `projectrequirements`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `candidate` (
+CREATE TABLE `projectrequirements` (
   `ID` int NOT NULL AUTO_INCREMENT,
-  `FirstName` varchar(45) NOT NULL,
-  `LastName` varchar(45) NOT NULL,
-  `DOB` datetime NOT NULL,
-  `EMail` varchar(45) NOT NULL,
-  `CellPhone` varchar(45) NOT NULL,
-  `loginuserID` int NOT NULL,
+  `Requirement` varchar(45) NOT NULL,
+  `Levelofexperty` int NOT NULL,
+  `companyprojectid` int DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `candidate`
+-- Dumping data for table `projectrequirements`
 --
 
-LOCK TABLES `candidate` WRITE;
-/*!40000 ALTER TABLE `candidate` DISABLE KEYS */;
-INSERT INTO `candidate` VALUES (1,'Eddie','Molieri','1976-01-28 00:00:00','emoli018@fiu.edu','3055525656',1),(2,'Nathan','N','1985-01-01 00:00:00','nathan@fiu.edu','3059996565',3),(3,'Sergio','X','1988-01-01 00:00:00','sergiou@fiu.edu','3052223131',4),(4,'Remy','Y','1987-01-01 00:00:00','remy@fiu.edu','3052211111',5);
-/*!40000 ALTER TABLE `candidate` ENABLE KEYS */;
+LOCK TABLES `projectrequirements` WRITE;
+/*!40000 ALTER TABLE `projectrequirements` DISABLE KEYS */;
+INSERT INTO `projectrequirements` VALUES (1,'MS Access',5,1),(2,'C#',4,1),(3,'T-SQL',3,1),(4,'T-SQL',3,2),(5,'HTML',3,2),(6,'JAVA',3,2),(7,'JAVA',2,3),(8,'LISP',3,3),(9,'C#',4,3),(10,'C#',5,4),(11,'MySQL',4,4),(12,'SCRUM Master',4,4),(13,'RPG',5,5),(14,'COBOL',5,5),(15,'SQL Server Admin',5,6),(16,'T-SQL',5,6),(17,'MySQL',5,6),(18,'MS Access',5,6);
+/*!40000 ALTER TABLE `projectrequirements` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
