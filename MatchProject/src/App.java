@@ -1,6 +1,7 @@
 
 import java.util.List;
-import Model.*;
+
+import Business.*;
 public class App{
    /*  static final String dbURL = "jdbc:mysql://localhost:3306/World";
     static final String user = "MySQLUser";
@@ -9,31 +10,38 @@ public class App{
     public static void main(String[] args){
     
           try {
-            DatabaseRepo repo = new DatabaseRepo();
-            LoginUser loggedInUser = repo.GetLoginByUserName("edi");
-            System.out.println(loggedInUser.UserType + " is the user type we are reading");
-            Candidate loggedInCandidate = repo.GetCandidateByLoginID(loggedInUser.ID);
-            System.out.println(loggedInCandidate.FirstName + " is logged in");
+             
+            LoginAccount loggedInUser = new LoginAccount();
+            Model.LoginUser user = loggedInUser.GetAccountByUserName("eddie");
+            System.out.println(user.UserType + " is the user type we are reading");
+
+            Candidate candidateInfo = new Candidate(); 
+            Model.Candidate loggedinUser = candidateInfo.GetCandidateByLoginID(user.ID);
+
+            System.out.println(loggedinUser.FirstName + " is logged in");
             
-            Company co = repo.GetCompanyByLoginID(0);
-            if (co.ID==0)
+            Company co = new Company();
+            Model.Company companyInfo = co.GetCompanyByLoginID(2);
+
+            if (companyInfo.ID==0)
             {
                 System.out.println("No records found for ID"); 
             }
             else{
-                System.out.println(co.Name  + " is logged in");
+                System.out.println(companyInfo.Name  + " is logged in");
             }
             
-            List<Company> allCompanies = repo.GetAllCompanies();
-            for (Company company : allCompanies) {
+
+            List<Model.Company> allCompanies = co.GetAllCompanies();
+            for (Model.Company company : allCompanies) {
               System.out.println("Company is: " + company.Name);
               
-              List<CompanyProject> projects = repo.GetCompanyProjects(company.ID);
-              for(CompanyProject project : projects)
+              List<Model.CompanyProject> projects = co.GetCompanyProjects(company.ID);
+              for(Model.CompanyProject project : projects)
               {
                 System.out.println("project name is: " + project.ProjectName);
-                List<ProjectRequirement> requirements = repo.GetProjectRequirements(project.ID);
-                for(ProjectRequirement requirement:requirements)
+                List<Model.ProjectRequirement> requirements = co.GetProjectRequirements(project.ID);
+                for(Model.ProjectRequirement requirement:requirements)
                 {
                   System.out.println("requirement is: " + requirement.Requirement);
                   System.out.println("rating is: " + requirement.LevelofExperty);
@@ -42,11 +50,11 @@ public class App{
               }
 
             }
-            List<Candidate> allCandidates =  repo.GetAllCandidates();
-            for (Candidate candidate : allCandidates) {
+            List<Model.Candidate> allCandidates =  candidateInfo.GetAllCandidates();
+            for (Model.Candidate candidate : allCandidates) {
                 System.out.println("Candidate is: " + candidate.FirstName);
-                List<CandidateQualification> qualifications = repo.GetCandidateQualifications(candidate.ID);
-                for(CandidateQualification qualification : qualifications)
+                List<Model.CandidateQualification> qualifications = candidateInfo.GetCandidateQualifications(candidate.ID);
+                for(Model.CandidateQualification qualification : qualifications)
                 {
                   System.out.println("qualifications are: " + qualification.Qualification);
                   System.out.println("qualifications level: " + qualification.LevelOfExperience);
