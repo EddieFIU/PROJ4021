@@ -6,14 +6,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.Candidate;
 import Model.LoginUser;
 
 public class DatabaseRepo {
     
     static final String dbURL = "jdbc:mysql://localhost:3306/Match";
     static final String user = "root";
-    static final String pass = "!";
+    static final String pass = "Moli0128!";
     
     public DatabaseRepo()
     {
@@ -76,7 +75,6 @@ public class DatabaseRepo {
 
         return candidate;
     }
-
  /**
  * @return
  */
@@ -112,6 +110,33 @@ public List<Model.Candidate> GetAllCandidates()
 
         return candidates;
     }
+public List<Model.CandidateQualification> GetCandidateQualifications(int CandidateID)
+    {
+        final String query = "SELECT * FROM candidatequalification where CandidateID = " + CandidateID;
+          List<Model.CandidateQualification> qualifications = new ArrayList<Model.CandidateQualification>();
+          try (
+            Connection conn = DriverManager.getConnection(dbURL, user, pass);
+            Statement stmt = conn.createStatement();
+           
+            ResultSet rs = stmt.executeQuery(query);)
+            {
+                 while (rs.next())
+                {
+                     Model.CandidateQualification qualification = new Model.CandidateQualification();
+                    qualification.ID = rs.getInt("ID");
+                    qualification.Qualification = rs.getString("Qualification");
+                    qualification.LevelOfExperience = rs.getInt("LevelOfExperience");
+                    qualification.CandidateID = rs.getInt("CandidateID");
+                    qualifications.add(qualification);
+                    }
+            }
+               catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        return qualifications;
+    }
+
  public Model.Company GetCompanyByLoginID(int loginID)
     {
         final String query = "SELECT * FROM company where loginuserID = " + loginID;
@@ -138,5 +163,88 @@ public List<Model.Candidate> GetAllCandidates()
 
         return company;
     }
+ public List<Model.Company> GetAllCompanies()
+    {
+        final String query = "SELECT * FROM company";
+        List<Model.Company> companies = new ArrayList<Model.Company>();
+          
+         try (
+            Connection conn = DriverManager.getConnection(dbURL, user, pass);
+            Statement stmt = conn.createStatement();
+           
+            ResultSet rs = stmt.executeQuery(query);)
+            {
+                  while (rs.next())
+                {
+                     Model.Company company = new Model.Company();
+                    
+                    company.ID = rs.getInt("ID");
+                    company.Name = rs.getString("Name");
+                    company.Industry = rs.getString("Industry");
+                    company.Email = rs.getString("EMail");
+                    company.PhoneNumber = rs.getString("PhoneNumber");
+                    company.LogInUserID = rs.getInt("loginuserID"); 
+                    companies.add(company);
+                    }
+            }
+               catch (SQLException e) {
+                e.printStackTrace();
+            }
 
+        return companies;
+    }
+
+public List<Model.CompanyProject> GetCompanyProjects(int CompanyID)
+    {
+        final String query = "SELECT * FROM companyproject where CompanyID = " + CompanyID;
+          List<Model.CompanyProject> projects = new ArrayList<Model.CompanyProject>();
+          try (
+            Connection conn = DriverManager.getConnection(dbURL, user, pass);
+            Statement stmt = conn.createStatement();
+           
+            ResultSet rs = stmt.executeQuery(query);)
+            {
+                 while (rs.next())
+                {
+                     Model.CompanyProject project = new Model.CompanyProject();
+                    project.ID = rs.getInt("ID");
+                    project.ProjectManagerEmail = rs.getString("ProjectManagerEmail");
+                    project.ProjectManagerName = rs.getString("ProjectManagerName");
+                    project.ProjectName = rs.getString("ProjectName");
+                    project.CompanyID = rs.getInt("CompanyID");
+                    projects.add(project);
+                    }
+            }
+               catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        return projects;
+    }
+    public List<Model.ProjectRequirement> GetProjectRequirements(int ProjectID)
+    {
+        final String query = "SELECT * FROM projectrequirements where companyprojectId = " + ProjectID;
+          List<Model.ProjectRequirement> requirements = new ArrayList<Model.ProjectRequirement>();
+          try (
+            Connection conn = DriverManager.getConnection(dbURL, user, pass);
+            Statement stmt = conn.createStatement();
+           
+            ResultSet rs = stmt.executeQuery(query);)
+            {
+                 while (rs.next())
+                {
+                     Model.ProjectRequirement requirement = new Model.ProjectRequirement();
+                    requirement.ID = rs.getInt("ID");
+                    requirement.Requirement = rs.getString("Requirement");
+                    requirement.LevelofExperty = rs.getInt("LevelofExperty");
+                    requirement.CompanyProjectID = rs.getInt("companyprojectid");
+                    requirements.add(requirement);
+                    }
+            }
+               catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        return requirements;
+    }
 }

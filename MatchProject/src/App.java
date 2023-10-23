@@ -1,11 +1,5 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.List;
 
-import com.mysql.cj.jdbc.DatabaseMetaData;
+import java.util.List;
 
 public class App{
    /*  static final String dbURL = "jdbc:mysql://localhost:3306/World";
@@ -20,6 +14,7 @@ public class App{
             System.out.println(loggedInUser.UserType + " is the user type we are reading");
             Model.Candidate loggedInCandidate = repo.GetCandidateByLoginID(loggedInUser.ID);
             System.out.println(loggedInCandidate.FirstName + " is logged in");
+            
             Model.Company co = repo.GetCompanyByLoginID(0);
             if (co.ID==0)
             {
@@ -29,9 +24,33 @@ public class App{
                 System.out.println(co.Name  + " is logged in");
             }
             
+            List<Model.Company> allCompanies = repo.GetAllCompanies();
+            for (Model.Company company : allCompanies) {
+              System.out.println("Company is: " + company.Name);
+              
+              List<Model.CompanyProject> projects = repo.GetCompanyProjects(company.ID);
+              for(Model.CompanyProject project : projects)
+              {
+                System.out.println("project name is: " + project.ProjectName);
+                List<Model.ProjectRequirement> requirements = repo.GetProjectRequirements(project.ID);
+                for(Model.ProjectRequirement requirement:requirements)
+                {
+                  System.out.println("requirement is: " + requirement.Requirement);
+                  System.out.println("rating is: " + requirement.LevelofExperty);
+                  
+                }
+              }
+
+            }
             List<Model.Candidate> allCandidates =  repo.GetAllCandidates();
             for (Model.Candidate candidate : allCandidates) {
                 System.out.println("Candidate is: " + candidate.FirstName);
+                List<Model.CandidateQualification> qualifications = repo.GetCandidateQualifications(candidate.ID);
+                for(Model.CandidateQualification qualification : qualifications)
+                {
+                  System.out.println("qualifications are: " + qualification.Qualification);
+                  System.out.println("qualifications level: " + qualification.LevelOfExperience);
+                }
             }
             
           } catch (Exception e) {
