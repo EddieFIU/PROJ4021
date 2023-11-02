@@ -380,6 +380,42 @@ public List<Model.CandidateQualification> GetCandidateQualifications(int Candida
         return companies;
     }
 
+public List<Model.QualifyingCompany> GetQualifyingCompanies(String qualificationSearching, int levelofExperience)
+    {
+        final String query = "SELECT c.ID, c.Name, c.Industry, p.ProjectName, p.ProjectManagerName, p.ProjectManagerEmail, r.Requirement, r.Levelofexperty " + 
+                "from company c inner join companyproject p on c.id = p.companyId " + 
+                "inner join projectrequirements r on r.companyprojectid = p.id where r.Requirement = '" + qualificationSearching + "' and Levelofexperty >= " + levelofExperience;
+
+        List<Model.QualifyingCompany> companies = new ArrayList<Model.QualifyingCompany>();
+          
+         try (
+            Connection conn = DriverManager.getConnection(dbURL, user, pass);
+            Statement stmt = conn.createStatement();
+           
+            ResultSet rs = stmt.executeQuery(query);)
+            {
+                  while (rs.next())
+                {
+                     Model.QualifyingCompany company = new Model.QualifyingCompany();
+                    
+                    company.ID = rs.getInt("ID");
+                    company.Name = rs.getString("Name");
+                    company.Industry = rs.getString("Industry");
+                    company.ProjectName = rs.getString("ProjectName");
+                    company.ProjectManagerName = rs.getString("ProjectManagerName");
+                    company.ProjectManagerEmail = rs.getString("ProjectManagerEmail");
+                    company.Requirement = rs.getString("Requirement");                    
+                    company.LevelOfExperty = rs.getInt("Levelofexperty"); 
+                    companies.add(company);
+                    }
+            }
+               catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        return companies;
+    }
+
 public List<Model.CompanyProject> GetCompanyProjects(int CompanyID)
     {
         final String query = "SELECT * FROM companyproject where CompanyID = " + CompanyID;

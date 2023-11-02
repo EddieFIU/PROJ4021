@@ -32,7 +32,7 @@ public Model.Company CreateNewCompany(Model.Company newCompany)
     {           
         return repo.CreateCompany(newCompany);
     } 
-    
+
 public Model.CompanyProject CreateNewCompanyProject(Model.CompanyProject newCompanyProject)
     {           
         return repo.CreateNewCompanyProject(newCompanyProject);
@@ -41,6 +41,11 @@ public Model.CompanyProject CreateNewCompanyProject(Model.CompanyProject newComp
 public List<Model.ProjectRequirement> GetProjectRequirements(int projectID) 
     {
         return repo.GetProjectRequirements(projectID);
+    }
+
+public List<Model.QualifyingCompany> GetQualifyingCompanies(String qualification, int levelOfExperience) 
+    {
+        return repo.GetQualifyingCompanies(qualification, levelOfExperience);
     }
 }
             
