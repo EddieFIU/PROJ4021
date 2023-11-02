@@ -112,6 +112,46 @@ public List<Model.Candidate> GetAllCandidates()
 
         return candidates;
     }
+
+
+/**
+ * @param qualification - qualificatoin looking for
+ * @param level - minimum level of experience needed
+ * @return
+ */
+public List<Model.QualifiedCandidate> GetCandidatesWithQualification(String qualification, int level)
+    {
+        final String query = "SELECT c.ID, c.FirstName, c.Lastname, c.Email, c.CellPhone, cq.Qualification, cq.levelofExperience " + 
+                                "FROM match.candidate c inner join match.candidatequalification cq on c.ID = cq.candidateID where cq.levelofExperience >= " + level + " and cq.Qualification = '" + qualification + "'";
+        //get list ready to return recrods from call
+         List<Model.QualifiedCandidate> candidates = new ArrayList<Model.QualifiedCandidate>();
+
+         try (
+            Connection conn = DriverManager.getConnection(dbURL, user, pass);
+            Statement stmt = conn.createStatement();
+            
+            ResultSet rs = stmt.executeQuery(query);)
+            {
+                while (rs.next())
+                {
+                     Model.QualifiedCandidate candidate = new Model.QualifiedCandidate();
+                    candidate.ID = rs.getInt("ID");
+                    candidate.FirstName = rs.getString("FirstName");
+                    candidate.LastName = rs.getString("LastName");
+                    candidate.Email = rs.getString("EMail");
+                    candidate.CellPhone = rs.getString("CellPhone");
+                    candidate.Qualification = rs.getString("Qualification");  
+                    candidate.LevelOfExperience = rs.getInt("levelofExperience");
+                    candidates.add(candidate);
+                    }              
+            }
+               catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        return candidates;
+    }
+
     public Model.Candidate CreateCandidate(Model.Candidate newCandidate)
     {
         final String query = "INSERT INTO candidate(FirstName, LastName, DOB, EMail, CellPhone, logInUserID) values(?, ?, ?, ?, ?, ?)";

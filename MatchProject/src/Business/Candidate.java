@@ -26,6 +26,10 @@ public class Candidate {
 
     }
 
+    public List<Model.QualifiedCandidate>GetCandidatesWithQualifications(String qualificationLookingFor, int minLevelOfExperience)
+    {
+        return  repo.GetCandidatesWithQualification(qualificationLookingFor, minLevelOfExperience);
+    } 
 
     public List<Model.Candidate>GetAllCandidates()
     {
@@ -36,6 +40,10 @@ public class Candidate {
     {
         return repo.GetCandidateQualifications(id);
     } 
-              
+    
+    public List<Model.QualifiedCandidate> GetQualifiedCandidates(String qualification,int minLevelOfExperience)
+    {
+        return repo.GetCandidatesWithQualification(qualification,minLevelOfExperience);
+    } 
 
 } 
