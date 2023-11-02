@@ -14,6 +14,18 @@ public class Candidate {
         return  repo.GetCandidateByLoginID(loginID);
 
     }
+    public Model.Candidate CreatenewCandidate(Model.Candidate newCandidate)
+    {
+        return  repo.CreateCandidate(newCandidate);
+
+    }
+    
+    public Model.CandidateQualification CreatenewCandidateQualification(Model.CandidateQualification newCandidateQualification)
+    {
+        return  repo.CreateCandidateQualification(newCandidateQualification);
+
+    }
+
 
     public List<Model.Candidate>GetAllCandidates()
     {
@@ -25,4 +37,5 @@ public class Candidate {
         return repo.GetCandidateQualifications(id);
     } 
               
+
 } 

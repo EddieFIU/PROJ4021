@@ -27,7 +27,17 @@ public Model.Company GetCompanyByLoginID(int loginID)
     {           
         return repo.GetCompanyByLoginID(loginID);
     } 
-        
+
+public Model.Company CreateNewCompany(Model.Company newCompany)
+    {           
+        return repo.CreateCompany(newCompany);
+    } 
+    
+public Model.CompanyProject CreateNewCompanyProject(Model.CompanyProject newCompanyProject)
+    {           
+        return repo.CreateNewCompanyProject(newCompanyProject);
+    }   
+
 public List<Model.ProjectRequirement> GetProjectRequirements(int projectID) 
     {
         return repo.GetProjectRequirements(projectID);
