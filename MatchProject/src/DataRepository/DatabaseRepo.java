@@ -1,9 +1,11 @@
 package DataRepository;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,7 +91,6 @@ public List<Model.Candidate> GetAllCandidates()
             Connection conn = DriverManager.getConnection(dbURL, user, pass);
             Statement stmt = conn.createStatement();
             
-            
             ResultSet rs = stmt.executeQuery(query);)
             {
                 while (rs.next())
@@ -111,6 +112,150 @@ public List<Model.Candidate> GetAllCandidates()
 
         return candidates;
     }
+    public Model.Candidate CreateCandidate(Model.Candidate newCandidate)
+    {
+        final String query = "INSERT INTO candidate(FirstName, LastName, DOB, EMail, CellPhone, logInUserID) values(?, ?, ?, ?, ?, ?)";
+        
+        try (Connection conn = DriverManager.getConnection(dbURL, user, pass);) {
+            PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, newCandidate.FirstName);
+            ps.setString(2, newCandidate.LastName);
+            ps.setDate(3, newCandidate.DOB);
+            ps.setString(4, newCandidate.Email);
+            ps.setString(5, newCandidate.CellPhone);
+            ps.setInt(6, newCandidate.LogInUserID);
+            int numRowsAffected = ps.executeUpdate();
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    newCandidate.ID = rs.getInt(1);
+                }
+            } catch (SQLException s) {
+                s.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return newCandidate;
+    }
+ public Model.Company CreateCompany(Model.Company newCompany)
+    {
+        final String query = "INSERT INTO company(Name, Industry, EMail, PhoneNumber, logInUserID) values(?, ?, ?, ?, ?)";
+        
+        try (Connection conn = DriverManager.getConnection(dbURL, user, pass);) {
+            PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, newCompany.Name);
+            ps.setString(2, newCompany.Industry);
+            ps.setString(3, newCompany.Email);
+            ps.setString(4, newCompany.PhoneNumber);
+            ps.setInt(5, newCompany.LogInUserID);
+            int numRowsAffected = ps.executeUpdate();
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    newCompany.ID = rs.getInt(1);
+                }
+            } catch (SQLException s) {
+                s.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return newCompany;
+    }
+     public Model.CandidateQualification CreateCandidateQualification(Model.CandidateQualification newCandidateQaulification)
+    {
+        final String query = "INSERT INTO candidatequalification(Qualification, levelOfExperience, CandidateID) values(?, ?, ?)";
+        
+        try (Connection conn = DriverManager.getConnection(dbURL, user, pass);) {
+            PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, newCandidateQaulification.Qualification);
+            ps.setInt(2, newCandidateQaulification.LevelOfExperience);
+            ps.setInt(3, newCandidateQaulification.CandidateID);
+            int numRowsAffected = ps.executeUpdate();
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    newCandidateQaulification.ID = rs.getInt(1);
+                }
+            } catch (SQLException s) {
+                s.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return newCandidateQaulification;
+    }
+    
+    public Model.CompanyProject CreateNewCompanyProject(Model.CompanyProject newCompanyProject)
+    {
+        final String query = "INSERT INTO companyproject(ProjectName, ProjectManagerName, ProjectManagerEMail, CompanyID) values(?, ?, ?, ?)";
+        
+        try (Connection conn = DriverManager.getConnection(dbURL, user, pass);) {
+            PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, newCompanyProject.ProjectName);
+            ps.setString(2, newCompanyProject.ProjectManagerName);
+            ps.setString(3, newCompanyProject.ProjectManagerEmail);
+            ps.setInt(4, newCompanyProject.CompanyID);
+            int numRowsAffected = ps.executeUpdate();
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    newCompanyProject.ID = rs.getInt(1);
+                }
+            } catch (SQLException s) {
+                s.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return newCompanyProject;
+    }
+
+    public Model.ProjectRequirement CreateNewProjectRequirement(Model.ProjectRequirement newProjectRequirement)
+    {
+        final String query = "INSERT INTO projectrequirements(Requirement, Levelofexperty, companyprojectid) values(?, ?, ?)";
+        
+        try (Connection conn = DriverManager.getConnection(dbURL, user, pass);) {
+            PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, newProjectRequirement.Requirement);
+            ps.setInt(2, newProjectRequirement.LevelofExperty);
+            ps.setInt(3, newProjectRequirement.CompanyProjectID);
+
+            int numRowsAffected = ps.executeUpdate();
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    newProjectRequirement.ID = rs.getInt(1);
+                }
+            } catch (SQLException s) {
+                s.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return newProjectRequirement;
+    }
+    
+    public Model.LoginUser CreateLogin(Model.LoginUser newLoginUser)
+    {
+        final String query = "INSERT INTO loginuser(UserName, Password, UserType, CreatedDateTime) values(?, ?, ?, ?)";
+        
+        try (Connection conn = DriverManager.getConnection(dbURL, user, pass);) {
+            PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, newLoginUser.UserName);
+            ps.setString(2, newLoginUser.Password);
+            ps.setString(3, newLoginUser.UserType);
+            ps.setDate(4, java.sql.Date.valueOf(java.time.LocalDate.now()));
+            int numRowsAffected = ps.executeUpdate();
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    newLoginUser.ID = rs.getInt(1);
+                }
+            } catch (SQLException s) {
+                s.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return newLoginUser;
+    }
+
 public List<Model.CandidateQualification> GetCandidateQualifications(int CandidateID)
     {
         final String query = "SELECT * FROM candidatequalification where CandidateID = " + CandidateID;

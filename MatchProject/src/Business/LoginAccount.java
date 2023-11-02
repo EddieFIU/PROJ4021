@@ -11,4 +11,10 @@ public class LoginAccount {
     {
         return repo.GetLoginByUserName(userName);
     }
+
+    public Model.LoginUser CreateUserLogin(Model.LoginUser newUser)
+    {
+        return repo.CreateLogin(newUser);
+    }
+    
 }

@@ -2,6 +2,7 @@
 import java.util.List;
 
 import Business.*;
+import Model.LoginUser;
 public class App{
    /*  static final String dbURL = "jdbc:mysql://localhost:3306/World";
     static final String user = "MySQLUser";
@@ -12,6 +13,16 @@ public class App{
           try {
              //creating login business object
             LoginAccount loggedInUser = new LoginAccount();
+
+            LoginUser newUser = new LoginUser();
+            newUser.Password="abc";
+            newUser.UserName="apple";
+            newUser.UserType="candidate";
+
+            newUser = loggedInUser.CreateUserLogin(newUser);
+            
+            System.out.println("new user id created is:" + newUser.ID);
+
             //calling method in business object to return our model
             Model.LoginUser user = loggedInUser.GetAccountByUserName("eddie");
             System.out.println(user.UserType + " is the user type we are reading");
