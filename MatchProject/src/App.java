@@ -1,8 +1,12 @@
 
+import java.io.Console;
 import java.util.List;
 
 import Business.*;
+import Model.CompanyProject;
 import Model.LoginUser;
+import Model.ProjectRequirement;
+import Model.QualifiedCandidate;
 public class App{
    /*  static final String dbURL = "jdbc:mysql://localhost:3306/World";
     static final String user = "MySQLUser";
@@ -14,14 +18,14 @@ public class App{
              //creating login business object
             LoginAccount loggedInUser = new LoginAccount();
 
-            LoginUser newUser = new LoginUser();
-            newUser.Password="abc";
-            newUser.UserName="apple";
-            newUser.UserType="candidate";
+           // LoginUser newUser = new LoginUser();
+           // newUser.Password="abc";
+           // newUser.UserName="apple";
+           // newUser.UserType="candidate";
 
-            newUser = loggedInUser.CreateUserLogin(newUser);
+          //  newUser = loggedInUser.CreateUserLogin(newUser);
             
-            System.out.println("new user id created is:" + newUser.ID);
+            //System.out.println("new user id created is:" + newUser.ID);
 
             //calling method in business object to return our model
             Model.LoginUser user = loggedInUser.GetAccountByUserName("eddie");
@@ -29,8 +33,24 @@ public class App{
 
             //creating candidate business object
             Candidate candidateInfo = new Candidate(); 
+            List<QualifiedCandidate> qualifiedCandidates = candidateInfo.GetCandidatesWithQualifications("C#", 3);
+            for (QualifiedCandidate qualifiedCandidate : qualifiedCandidates) {
+               System.out.println("Name of candidate: " + qualifiedCandidate.FirstName + " level = " + qualifiedCandidate.LevelOfExperience + " qualification = " + qualifiedCandidate.Qualification );
+            }
+            
+            Console cnsl 
+            = System.console();
+            String username =  cnsl.readLine("enter your name");
+            String pwrd = cnsl.readLine("enter password");
+            if(user.UserName.equalsIgnoreCase(username) && user.Password.equalsIgnoreCase(pwrd))
+            {
+              System.out.println(loggedinUser.FirstName + " is logged in");
+            }
+
+            
             //returning model of logged in user by id
             Model.Candidate loggedinUser = candidateInfo.GetCandidateByLoginID(user.ID);
+            
             System.out.println(loggedinUser.FirstName + " is logged in");
             
             //creating company business object
@@ -38,6 +58,19 @@ public class App{
             //calling method in business object to return company model
             Model.Company companyInfo = co.GetCompanyByLoginID(2);
 
+            List<CompanyProject> projs= co.GetCompanyProjects(companyInfo.ID);
+            for (CompanyProject companyProject : projs) {
+              if (companyProject.ProjectName.equalsIgnoreCase("ProjectB") )
+              {
+                 Model.ProjectRequirement requirement = new ProjectRequirement();
+                  requirement.CompanyProjectID = companyProject.ID;
+                  requirement.LevelofExperty = 5;
+                  requirement.Requirement = "PYTHON";
+                  co.CreateNewProjectRequirement(requirement);
+              }
+            }
+
+           
             if (companyInfo.ID==0)
             {
                 System.out.println("No records found for ID"); 
@@ -58,10 +91,10 @@ public class App{
                 System.out.println("project name is: " + project.ProjectName);
                 List<Model.ProjectRequirement> requirements = co.GetProjectRequirements(project.ID);
                 //calling same business object for company to return requirements by project.  all based on the company we are on in the for loop
-                for(Model.ProjectRequirement requirement:requirements)
+                for(Model.ProjectRequirement req:requirements)
                 {
-                  System.out.println("requirement is: " + requirement.Requirement);
-                  System.out.println("rating is: " + requirement.LevelofExperty);
+                  System.out.println("requirement is: " + req.Requirement);
+                  System.out.println("rating is: " + req.LevelofExperty);
                   
                 }
               }

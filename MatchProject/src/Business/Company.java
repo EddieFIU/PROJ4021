@@ -37,7 +37,12 @@ public Model.CompanyProject CreateNewCompanyProject(Model.CompanyProject newComp
     {           
         return repo.CreateNewCompanyProject(newCompanyProject);
     }   
-
+    
+public Model.ProjectRequirement CreateNewProjectRequirement(Model.ProjectRequirement newProjectRequirement)
+{
+    return repo.CreateNewProjectRequirement(newProjectRequirement);
+}
+    
 public List<Model.ProjectRequirement> GetProjectRequirements(int projectID) 
     {
         return repo.GetProjectRequirements(projectID);
