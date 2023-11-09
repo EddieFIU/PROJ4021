@@ -37,20 +37,22 @@ public class App{
             for (QualifiedCandidate qualifiedCandidate : qualifiedCandidates) {
                System.out.println("Name of candidate: " + qualifiedCandidate.FirstName + " level = " + qualifiedCandidate.LevelOfExperience + " qualification = " + qualifiedCandidate.Qualification );
             }
-            
+
             Console cnsl 
             = System.console();
             String username =  cnsl.readLine("enter your name");
             String pwrd = cnsl.readLine("enter password");
-            if(user.UserName.equalsIgnoreCase(username) && user.Password.equalsIgnoreCase(pwrd))
-            {
-              System.out.println(loggedinUser.FirstName + " is logged in");
-            }
+            
 
             
             //returning model of logged in user by id
             Model.Candidate loggedinUser = candidateInfo.GetCandidateByLoginID(user.ID);
             
+            if(user.UserName.equalsIgnoreCase(username) && user.Password.equalsIgnoreCase(pwrd))
+            {
+              System.out.println(loggedinUser.FirstName + " is logged in");
+            }
+
             System.out.println(loggedinUser.FirstName + " is logged in");
             
             //creating company business object

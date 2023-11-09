@@ -6,6 +6,7 @@ import DataRepository.DatabaseRepo;
 
 public class Candidate {
  DatabaseRepo repo;
+ 
     public Candidate(){
         repo = new DatabaseRepo();
     }
