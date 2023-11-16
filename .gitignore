@@ -1,1 +1,13 @@
 MatchProject/bin/*
+MatchProject/bin/Business/Candidate.class
+MatchProject/bin/Business/Company.class
+MatchProject/bin/Business/LoginAccount.class
+MatchProject/bin/DataRepository/DatabaseRepo.class
+MatchProject/bin/Model/Candidate.class
+MatchProject/bin/Model/CandidateQualification.class
+MatchProject/bin/Model/Company.class
+MatchProject/bin/Model/CompanyProject.class
+MatchProject/bin/Model/LoginUser.class
+MatchProject/bin/Model/ProjectRequirement.class
+MatchProject/bin/Model/QualifiedCandidate.class
+MatchProject/bin/Model/QualifyingCompany.class
