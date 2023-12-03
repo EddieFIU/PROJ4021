@@ -13,5 +13,6 @@
             "database": "World",
             "username": "MySQLUser"
         }
-    ]
+    ],
+    "java.compile.nullAnalysis.mode": "automatic"
 }
