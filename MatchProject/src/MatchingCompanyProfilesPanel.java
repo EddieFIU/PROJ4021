@@ -12,6 +12,7 @@ public class MatchingCompanyProfilesPanel extends JPanel {
     private int candidateID;
     private JTable companyTable;
     CandidateBusinessLayer candidateBusinessLayer;
+    private JButton backtoDashboardButton;
 
     public MatchingCompanyProfilesPanel() {
         this.candidateID = LoginPanel.loginIDs;
@@ -58,6 +59,22 @@ public class MatchingCompanyProfilesPanel extends JPanel {
         // Adding the table to a scroll pane
         JScrollPane scrollPane = new JScrollPane(companyTable);
         add(scrollPane, BorderLayout.CENTER);
+
+        // Back to Dashboard Button
+        backtoDashboardButton = new JButton("Back to Dashboard");
+        backtoDashboardButton.addActionListener(e -> goBackToDashboard());
+        add(backtoDashboardButton, BorderLayout.SOUTH);
+    }
+
+    private void goBackToDashboard() {
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        frame.getContentPane().removeAll();
+
+        // Assuming DashboardPanel is the name of your dashboard panel class
+        CandidateDashboardPanel dashboardPanel = new CandidateDashboardPanel();
+        frame.getContentPane().add(dashboardPanel);
+        frame.revalidate();
+        frame.repaint();
     }
 
     // ButtonRenderer class

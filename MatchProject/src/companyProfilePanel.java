@@ -10,6 +10,7 @@ public class companyProfilePanel extends JPanel {
 
     private JTextField nameField, industryField, emailField, phoneField;
     private JButton actionButton; // Unified button for both create and update actions
+    private JButton backtoDashboardButton; // Back to Dashboard button
 
     public companyProfilePanel() {
         // Setting the layout
@@ -31,15 +32,34 @@ public class companyProfilePanel extends JPanel {
         actionButton = new JButton();
         add(actionButton);
 
+        // Creating the Back to Dashboard button
+        backtoDashboardButton = new JButton("Back to Dashboard");
+        backtoDashboardButton.addActionListener(e -> goBackToDashboard());
+        add(backtoDashboardButton);
+
         // Check for existing data and update UI accordingly
         checkAndFillData();
 
         // Styling
-        styleComponents(nameField, industryField, emailField, phoneField, actionButton);
+        styleComponents(nameField, industryField, emailField, phoneField, actionButton, backtoDashboardButton);
 
         // Set up action button listener
         setUpActionButtonListener();
     }
+
+    private void goBackToDashboard() {
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        frame.getContentPane().removeAll();
+
+        // Assuming DashboardPanel is the name of your dashboard panel class
+        companyDashboardPanel dashboardPanel = new companyDashboardPanel();
+        frame.getContentPane().add(dashboardPanel);
+        frame.revalidate();
+        frame.repaint();
+    }
+
+  
+
 
     private void checkAndFillData() {
         System.out.println(LoginPanel.loginIDs);

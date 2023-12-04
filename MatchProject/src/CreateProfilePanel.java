@@ -28,7 +28,8 @@ public class CreateProfilePanel extends JPanel {
     private List<CandidateQualification> qualifications;
     private CandidateBusinessLayer candidate;
     private JButton backButton;
-     int  CandidateId;
+    int  CandidateId;
+
     public CreateProfilePanel() {
         candidate= new CandidateBusinessLayer();
         qualifications = new ArrayList<>();

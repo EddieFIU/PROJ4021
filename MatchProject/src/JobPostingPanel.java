@@ -12,6 +12,7 @@ public class JobPostingPanel extends JPanel {
     private JComboBox<Integer> companyProjectIdComboBox;
     private JButton postButton;
     CompanyBusinessLayer companyBusinessLayer;
+    private JButton backtoDashboardButton;
 
     public JobPostingPanel() {
         this.companyBusinessLayer = new CompanyBusinessLayer();
@@ -21,17 +22,34 @@ public class JobPostingPanel extends JPanel {
         levelOfExpertiseSpinner = new JSpinner(new SpinnerNumberModel(0, 0, 30, 1));
         companyProjectIdComboBox = new JComboBox<>(); // Populate this with company project IDs
         postButton = new JButton("Post Requirement");
-        companyProjectIdComboBox = new JComboBox<>();
+
         List<CompanyProject> companyProjects = companyBusinessLayer.getCompanyProjectsByCompanyID(LoginPanel.loginIDs);
         for (CompanyProject project : companyProjects) {
             companyProjectIdComboBox.addItem(project.ID);
         }
+
         add(createLabeledField("Requirement:", requirementField));
         add(createLabeledField("Level of Expertise (Years):", levelOfExpertiseSpinner));
         add(createLabeledField("Company Project ID:", companyProjectIdComboBox));
         add(postButton);
 
         postButton.addActionListener(e -> postRequirement());
+
+        // Back to Dashboard Button
+        backtoDashboardButton = new JButton("Back to Dashboard");
+        backtoDashboardButton.addActionListener(e -> goBackToDashboard());
+        add(backtoDashboardButton);
+    }
+
+    private void goBackToDashboard() {
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        frame.getContentPane().removeAll();
+
+        // Assuming DashboardPanel is the name of your dashboard panel class
+        companyDashboardPanel dashboardPanel = new companyDashboardPanel();
+        frame.getContentPane().add(dashboardPanel);
+        frame.revalidate();
+        frame.repaint();
     }
 
     private JPanel createLabeledField(String label, JComponent field) {

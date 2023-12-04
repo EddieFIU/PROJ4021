@@ -124,10 +124,10 @@ public class CandidateDashboardPanel extends JPanel {
         frame.repaint();
     }
     private void loadCandidateProfile() {
-        // ... (existing loadCandidateProfile code)
+        //
     }
 
     private void applyChanges(ActionEvent e) {
-        // ... (existing applyChanges code)
+        //
     }
 }

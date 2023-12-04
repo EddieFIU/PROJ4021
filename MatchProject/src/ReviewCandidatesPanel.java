@@ -9,11 +9,12 @@ public class ReviewCandidatesPanel extends JPanel {
 
     CompanyBusinessLayer companyBusinessLayer;
     private JTable candidatesTable;
+    private JButton backtoDashboardButton;
 
     private int companyID = LoginPanel.loginIDs; // ID of the logged-in user's company
 
     public ReviewCandidatesPanel() {
-        companyBusinessLayer= new CompanyBusinessLayer();
+        companyBusinessLayer = new CompanyBusinessLayer();
         setLayout(new BorderLayout());
 
         candidatesTable = new JTable();
@@ -21,7 +22,16 @@ public class ReviewCandidatesPanel extends JPanel {
 
         JButton reviewButton = new JButton("Review Candidates");
         reviewButton.addActionListener(e -> loadCandidates());
-        add(reviewButton, BorderLayout.SOUTH);
+
+        // Back to Dashboard Button
+        backtoDashboardButton = new JButton("Back to Dashboard");
+        backtoDashboardButton.addActionListener(e -> goBackToDashboard());
+
+        // Panel for buttons
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        buttonPanel.add(backtoDashboardButton);
+        buttonPanel.add(reviewButton);
+        add(buttonPanel, BorderLayout.SOUTH);
 
         loadCandidates(); // Load candidates when the panel is initialized
     }
@@ -40,5 +50,16 @@ public class ReviewCandidatesPanel extends JPanel {
         }
 
         candidatesTable.setModel(model);
+    }
+
+    private void goBackToDashboard() {
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        frame.getContentPane().removeAll();
+
+        // Assuming DashboardPanel is the name of your dashboard panel class
+        companyDashboardPanel dashboardPanel = new companyDashboardPanel();
+        frame.getContentPane().add(dashboardPanel);
+        frame.revalidate();
+        frame.repaint();
     }
 }
